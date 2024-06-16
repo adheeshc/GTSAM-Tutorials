@@ -29,7 +29,7 @@ void readOdometryFile(const std::string& filename, std::vector<gtsam::Pose2>& od
     file.close();
 }
 
-void readInitialEstimatesFile(const std::string& filename, gtsam::Values& initialEstimates) {
+void readGPSFile(const std::string& filename, std::vector<std::pair<double, double>>& GPSReadings) {
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error opening file: " << filename << std::endl;
@@ -38,10 +38,28 @@ void readInitialEstimatesFile(const std::string& filename, gtsam::Values& initia
     std::string line;
     while (std::getline(file, line)) {
         std::stringstream ss(line);
-        size_t key;
+        double x, y;
+        if (ss >> x >> y) {
+            GPSReadings.emplace_back(x, y);
+        } else {
+            std::cerr << "Error reading line: " << line << std::endl;
+        }
+    }
+    file.close();
+}
+
+void readInitialEstimatesFile(const std::string& filename, std::vector<gtsam::Pose2>& initialEstimates) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
         double x, y, theta;
-        if (ss >> key >> x >> y >> theta) {
-            initialEstimates.insert(key, gtsam::Pose2(x, y, theta));
+        if (ss >> x >> y >> theta) {
+            initialEstimates.emplace_back(x, y, theta);
         } else {
             std::cerr << "Error reading line: " << line << std::endl;
         }

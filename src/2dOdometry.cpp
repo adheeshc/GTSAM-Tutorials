@@ -24,20 +24,25 @@ int main(int argc, char** argv) {
     noiseModel::Diagonal::shared_ptr priorNoise = noiseModel::Diagonal::Sigmas(Vector3(0.3, 0.3, 1));
     graph.addPrior(1, priorMean, priorNoise);
 
+    // Add odometry readings
     std::vector<Pose2> odometryReadings;
     readOdometryFile("../data/odometry.txt", odometryReadings);
     noiseModel::Diagonal::shared_ptr odometryNoise = noiseModel::Diagonal::Sigmas(Vector3(0.2, 0.2, 0.1));
-
     for(size_t i = 0; i<odometryReadings.size(); i++){
         graph.emplace_shared<BetweenFactor<Pose2>>(i+1, i+2, odometryReadings[i], odometryNoise);
     }
     graph.print("\nFactor Graph:\n");
 
-    Values estimates;
-    readInitialEstimatesFile("../data/estimates.txt", estimates);
-    estimates.print("\nInitial Estimate:\n");
+     // Add initial estimates
+    std::vector<Pose2> estimateReadings;
+    readInitialEstimatesFile("../data/estimates.txt", estimateReadings);
+    Values initialEstimate;
+    for (size_t i = 0; i < estimateReadings.size(); i++) {
+        initialEstimate.insert(i + 1, Pose2(estimateReadings[i]));
+    }
+    initialEstimate.print("\nInitial Estimate:\n");
 
-    Values result = LevenbergMarquardtOptimizer(graph, estimates).optimize();
+    Values result = LevenbergMarquardtOptimizer(graph, initialEstimate).optimize();
     result.print("Final Result:\n");
 
     std::vector<double> resultVector;
@@ -71,6 +76,6 @@ int main(int argc, char** argv) {
               << marginals.marginalCovariance(3) << std::endl;
     std::cout << "x4 covariance:\n"
               << marginals.marginalCovariance(4) << std::endl;
-
+    
     return 0;
 }
