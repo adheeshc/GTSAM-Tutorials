@@ -14,6 +14,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 set(exec_sources
     src/2dOdometry.cpp
+    src/2dLocalization.cpp
      # Add more .cpp files as needed
 )
 
