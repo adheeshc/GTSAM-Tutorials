@@ -12,11 +12,20 @@ Prerequisites
 Compilation & Installation
 ------
 
-In the library folder excute:
+In the parent folder excute:
 
 ```
 $ mkdir build
 $ cd build
 $ cmake ..
+```
+Build all examples, execute:
+
+```
 $ make
+```
+
+Build specific example, execute:
+```
+$ make <example_name>
 ```
