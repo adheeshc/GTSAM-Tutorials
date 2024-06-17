@@ -93,5 +93,11 @@ int main(int argc, char** argv) {
     graph.saveGraph(graphFile, result);
     graphFile.close();
 
+    int dotResult = std::system("dot -Tpng ../output/landmarkSLAM_graph.dot -o ../output/landmarkSLAM_graph.png");
+    if (dotResult != 0) {
+        std::cerr << "Error generating graph image using Graphviz" << std::endl;
+        return 1;
+    }
+
     return 0;
 }
