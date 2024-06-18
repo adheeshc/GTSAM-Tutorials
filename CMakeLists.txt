@@ -17,6 +17,7 @@ set(exec_sources
     src/2dLocalization.cpp
     src/poseSLAM2D.cpp
     src/landmarkSLAM.cpp
+    src/sfm.cpp
      # Add more .cpp files as needed
 )
 
