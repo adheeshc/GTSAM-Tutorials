@@ -22,8 +22,8 @@ int main(int argc, char** argv) {
     Cal3_S2::shared_ptr K(new Cal3_S2(50.0, 50.0, 0.0, 50.0, 50.0));  // camera calibration
 
     noiseModel::Isotropic::shared_ptr measurementNoise = noiseModel::Isotropic::Sigma(2, 1.0);
-    vector<Point3> points = createPoints();
-    vector<Pose3> poses = createPoses();
+    std::vector<Point3> points = createPoints();
+    std::vector<Pose3> poses = createPoses();
 
     NonlinearFactorGraph graph;
 
