@@ -8,7 +8,6 @@
 #include <iostream>
 #include "readFiles.h"
 
-
 /**
  * Example of a simple 2D localization example
  *  - Robot poses are facing along the X axis (horizontal, to the right in 2D)
@@ -28,12 +27,12 @@ int main(int argc, char** argv) {
     std::vector<Pose2> odometryReadings;
     readOdometryFile("../data/odometry.txt", odometryReadings);
     noiseModel::Diagonal::shared_ptr odometryNoise = noiseModel::Diagonal::Sigmas(Vector3(0.2, 0.2, 0.1));
-    for(size_t i = 0; i<odometryReadings.size(); i++){
-        graph.emplace_shared<BetweenFactor<Pose2>>(i+1, i+2, odometryReadings[i], odometryNoise);
+    for (size_t i = 0; i < odometryReadings.size(); i++) {
+        graph.emplace_shared<BetweenFactor<Pose2>>(i + 1, i + 2, odometryReadings[i], odometryNoise);
     }
     graph.print("\nFactor Graph:\n");
 
-     // Add initial estimates
+    // Add initial estimates
     std::vector<Pose2> estimateReadings;
     readInitialEstimatesFile("../data/estimates.txt", estimateReadings);
     Values initialEstimate;
@@ -76,6 +75,6 @@ int main(int argc, char** argv) {
               << marginals.marginalCovariance(3) << std::endl;
     std::cout << "x4 covariance:\n"
               << marginals.marginalCovariance(4) << std::endl;
-    
+
     return 0;
 }

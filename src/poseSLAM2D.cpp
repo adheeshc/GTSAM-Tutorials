@@ -89,7 +89,7 @@ int main(int argc, char** argv) {
     std::cout << "Initial error: " << graph.error(initialEstimate) << std::endl;
     std::cout << "Error after optimization: " << graph.error(result) << std::endl;
 
-    std::ofstream graphFile("../output/graph.dot");
+    std::ofstream graphFile("../output/landmarkSLAM_graph.dot");
     graph.saveGraph(graphFile, result);
     graphFile.close();
 
