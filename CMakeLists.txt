@@ -19,6 +19,7 @@ set(exec_sources
     src/landmarkSLAM.cpp
     src/sfm.cpp
     src/sfmBAL.cpp
+    src/cameraResectioning.cpp
      # Add more .cpp files as needed
 )
 

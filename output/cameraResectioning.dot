@@ -1,0 +1,14 @@
+graph {
+  size="5,5";
+
+  var8646911284551352321[label="x1", pos="0,0!"];
+
+  factor0[label="", shape=point];
+  var8646911284551352321--factor0;
+  factor1[label="", shape=point];
+  var8646911284551352321--factor1;
+  factor2[label="", shape=point];
+  var8646911284551352321--factor2;
+  factor3[label="", shape=point];
+  var8646911284551352321--factor3;
+}
