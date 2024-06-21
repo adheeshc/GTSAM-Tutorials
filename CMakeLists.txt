@@ -21,6 +21,7 @@ set(exec_sources
     src/sfmBAL.cpp
     src/cameraResectioning.cpp
     src/visualOdometry.cpp
+    src/selfCalibration.cpp
      # Add more .cpp files as needed
 )
 
