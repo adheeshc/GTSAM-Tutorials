@@ -20,6 +20,7 @@ set(exec_sources
     src/sfm.cpp
     src/sfmBAL.cpp
     src/cameraResectioning.cpp
+    src/visualOdometry.cpp
      # Add more .cpp files as needed
 )
 
